@@ -29,15 +29,14 @@ export async function removeContact(contactId) {
     return removedContact
 }
 
-export async function addContact(name, email, phone) {
+export async function addContact({ name, email, phone }) {
     const contacts = await listContacts();
-    const newContact = {id: nanoid(), name, email, phone};
-
+    const newContact = { id: nanoid(), name, email, phone };
     contacts.push(newContact);
     await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
-
-    return newContact
+    return newContact;
 }
+
 
 export async function updateContact(id, data) {
     const contacts = await listContacts();
